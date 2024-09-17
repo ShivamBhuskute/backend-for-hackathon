@@ -16,4 +16,9 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 // app.use(cookieParser());
 
+//routes import
+import aiRouter from "./routes/aI.routes.js"
+
+app.use("/api/aI", aiRouter)
+
 export { app };
