@@ -20,7 +20,9 @@ const predictStudent = asyncHandler(async (req, res) => {
             studentData
         );
 
-        return res.status(200).json(new ApiResponse(response.data));
+        return res
+            .status(201)
+            .json(new ApiResponse(200, response.data, "Successful"));
     } catch (error) {
         if (error.response) {
             throw new ApiError(error.response.status, error.response.data);
