@@ -1,39 +1,43 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const submissionSchema = new Schema({
+    id: {
+        type: String,
+        required: true
+    },
     bullying: {
         type: Number,
         default: false
     },
-    finance: {
+    financialIssues: {
         type: Number,
         default: false
     },
-    menIssue: {
+    mentalHealth: {
         type: Number,
         default: false
     },
-    phyIssue: {
+    physicalHealth: {
         type: Number,
         default: false
     },
-    discrimination: {
+    genderDiscrimination: {
         type: Number,
         default: false
     },
-    physical: {
+    physicalDisability: {
         type: Number,
         default: false
     },
-    Working_and_Studying: {
+    workingAndStudying: {
         type: Number
     },
-    Not_Interested: {
+    interestedInStudies: {
         type: Number
     },
-    schoolFar: {
+    schoolFarOff: {
         type: Number
     }
-})
+});
 
-export const student = mongoose.model("student", submissionSchema)
+export const student = mongoose.model("student", submissionSchema);

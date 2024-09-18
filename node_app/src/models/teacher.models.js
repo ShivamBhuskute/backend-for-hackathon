@@ -2,6 +2,10 @@ import mongoose, {Schema} from "mongoose";
 import { Types } from "mongoose";
 
 const teaacherSchema = new Schema({
+    studentUniqueId: {
+        type: String, 
+        required: true
+    },
     attendace: {
         type: Number
     },

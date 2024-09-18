@@ -10,15 +10,16 @@ const studentSubmission = asyncHandler(async (req, res) => {
 
     // Validate required fields
     const requiredFields = [
+        "id", // Change from uniqueId to id
         "bullying",
-        "finance",
-        "menIssue",
-        "phyIssue",
-        "discrimination",
-        "physical",
-        "Working_and_Studying",
-        "Not_Interested",
-        "school_Far",
+        "financialIssues", // Change from finance to financialIssues
+        "mentalHealth", // Change from menIssue to mentalHealth
+        "physicalHealth", // Change from phyIssue to physicalHealth
+        "genderDiscrimination", // Change from discrimination to genderDiscrimination
+        "physicalDisability", // Change from physical to physicalDisability
+        "workingAndStudying", // Change from Working_and_Studying to workingAndStudying
+        "interestedInStudies", // Change from Not_Interested to interestedInStudies
+        "schoolFarOff" // Change from school_Far to schoolFarOff
     ];
 
     for (const field of requiredFields) {
@@ -29,15 +30,16 @@ const studentSubmission = asyncHandler(async (req, res) => {
 
     // Create a new student submission instance
     const newSubmission = new student({
+        id: studentData.id, // Ensure this matches the new payload structure
         bullying: studentData.bullying,
-        finance: studentData.finance,
-        menIssue: studentData.menIssue,
-        phyIssue: studentData.phyIssue,
-        discrimination: studentData.discrimination,
-        physical: studentData.physical,
-        Working_and_Studying: studentData.Working_and_Studying,
-        Not_Interested: studentData.Not_Interested,
-        school_Far: studentData.school_Far,
+        financialIssues: studentData.financialIssues, // Ensure this matches the new payload structure
+        mentalHealth: studentData.mentalHealth, // Ensure this matches the new payload structure
+        physicalHealth: studentData.physicalHealth, // Ensure this matches the new payload structure
+        genderDiscrimination: studentData.genderDiscrimination, // Ensure this matches the new payload structure
+        physicalDisability: studentData.physicalDisability, // Ensure this matches the new payload structure
+        workingAndStudying: studentData.workingAndStudying, // Ensure this matches the new payload structure
+        interestedInStudies: studentData.interestedInStudies, // Ensure this matches the new payload structure
+        schoolFarOff: studentData.schoolFarOff, // Ensure this matches the new payload structure 
     });
 
     // Save the submission to the database
