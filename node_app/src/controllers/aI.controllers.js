@@ -1,40 +1,137 @@
+// import { asyncHandler } from "../utils/asyncHandler.js";
+// import { ApiError } from "../utils/ApiError.js";
+// import { ApiResponse } from "../utils/ApiResponse.js";
+// import axios from "axios";
+// import { student } from "../models/students.models.js"; // Adjust the import based on your file structure
+// import { teacher } from "../models/teacher.models.js"; // Adjust the import based on your file structure
+
+// const predictStudent = asyncHandler(async (req, res) => {
+//     const { uniqueId } = req.body; // Assuming the unique ID is passed as a query parameter
+
+//     if (!uniqueId) {
+//         throw new ApiError(400, "Unique ID is required.");
+//     }
+
+//     try {
+//         // Retrieve student data from the database based on uniqueId
+//         const std = await student.findOne({ uniqueId }); // Adjust the query as needed
+
+//         if (!std) {
+//             throw new ApiError(404, "Student not found.");
+//         }
+
+//         // Retrieve teacher data from the database based on student's uniqueId
+//         const tea = await teacher.findOne({ uniqueId: std.uniqueId }); // Adjust the query as needed
+
+//         if (!tea) {
+//             throw new ApiError(404, "Teacher not found.");
+//         }
+
+//         // Combine student and teacher data into the correct format for FastAPI
+//         const combinedData = {
+//             Attendance: tea.attendance,
+//             Grades: tea.grades, // Get grades from the tea database
+//             Homework_Streak: tea.homeworkStreak,
+//             Feedback_Behavior: tea.behaviour, // Get behavior score from the tea database
+//             Weekly_Test_Scores: tea.weeklyTestScores,
+//             Attention_Test_Scores: tea.attentionTestScores,
+//             Ragging: std.ragging || 0,
+//             Finance_Issue: std.financeIssue || 0,
+//             Mental_Health_Issue: std.mentalHealthIssue || 0,
+//             Physical_Health_Issue: std.physicalHealthIssue || 0,
+//             Discrimination_Based_on_Gender: std.discriminationBasedOnGender || 0,
+//             Physical_Disability: std.physicalDisability || 0,
+//             Not_Interested: std.notInterested || 0,
+//             Working_and_Studying: std.workingAndStudying || 0,
+//             School_Is_Far: std.schoolIsFar || 0,
+//         };
+
+//         // Send combined data to FastAPI
+//         const response = await axios.post("http://127.0.0.1:8000/predict", combinedData);
+
+//         // Return the prediction result
+//         return res.status(200).json(new ApiResponse(200, response.data, "Prediction successful"));
+//     } catch (error) {
+//         if (error.response) {
+//             throw new ApiError(error.response.status, error.response.data);
+//         } else if (error.request) {
+//             throw new ApiError(500, "No response received from prediction service.");
+//         } else {
+//             throw new ApiError(500, error.message);
+//         }
+//     }
+// });
+
+// export { predictStudent };
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import axios from "axios";
+import { student } from "../models/students.models.js"; // Adjust the import based on your file structure
+import { teacher } from "../models/teacher.models.js"; // Adjust the import based on your file structure
 
 const predictStudent = asyncHandler(async (req, res) => {
-    const studentData = req.body;
+    const { uniqueId } = req.body; // Assuming the unique ID is passed in the request body
 
-    // Validate input data
-    // Make a POST request to the FastAPI prediction endpoint
-    // Send the prediction result back to the client
-
-    if (!studentData) {
-        throw new ApiError(400, "Student data is required.");
+    if (!uniqueId) {
+        throw new ApiError(400, "Unique ID is required.");
     }
 
     try {
-        const response = await axios.post(
-            "http://127.0.0.1:8000/predict",
-            studentData
-        );
+        // Retrieve student data from the database based on uniqueId
+        const std = await student.findOne({ uniqueId });
 
-        return res
-            .status(201)
-            .json(new ApiResponse(200, response.data, "Successful"));
+        if (!std) {
+            throw new ApiError(404, "Student not found.");
+        }
+
+        // Retrieve teacher data based on student's uniqueId
+        const tea = await teacher.findOne({ uniqueId: std.uniqueId });
+
+        if (!tea) {
+            throw new ApiError(404, "Teacher not found.");
+        }
+
+        console.log(tea.attendance);
+        
+
+        // Combine student and teacher data into the correct format for FastAPI
+        const combinedData = {
+            Attendance: tea.attendance,
+            Grades: tea.grades,
+            Homework_Streak: tea.streak,
+            Feedback_Behavior: tea.behaviour,
+            Weekly_Test_Scores: tea.test,
+            Attention_Test_Scores: tea.attention,
+            Ragging: std.ragging || 0,
+            Finance_Issue: std.financeIssue || 0,
+            Mental_Health_Issue: std.mentalHealthIssue || 0,
+            Physical_Health_Issue: std.physicalHealthIssue || 0,
+            Discrimination_Based_on_Gender: std.discriminationBasedOnGender || 0,
+            Physical_Disability: std.physicalDisability || 0,
+            Not_Interested: std.notInterested || 0,
+            Working_and_Studying: std.workingAndStudying || 0,
+            School_Is_Far: std.schoolIsFar || 0,
+        };
+
+        // Log combined data for debugging
+        console.log("Combined Data being sent to FastAPI:", combinedData);
+
+        // Send combined data to FastAPI
+        const response = await axios.post("http://127.0.0.1:8000/predict", combinedData);
+
+        // Return the prediction result
+        return res.status(200).json(response.data);
     } catch (error) {
+        console.error("Error occurred while fetching prediction:", error); // Log full error for debugging
+
         if (error.response) {
+            console.error("Response data:", error.response.data); // Log response data for further insight
             throw new ApiError(error.response.status, error.response.data);
         } else if (error.request) {
-            // The request was made but no response was received
-            throw new ApiError(
-                500,
-                "No response received from prediction service."
-            );
+            throw new ApiError(500, "No response received from prediction service.");
         } else {
-            // Something happened in setting up the request that triggered an Error
-            throw new ApiError(500, error.message);
+            throw new ApiError(500, `Unexpected error occurred: ${error.message}`);
         }
     }
 });

@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const submissionSchema = new Schema({
-    id: {
+    uniqueId: {
         type: String,
         required: true
     },

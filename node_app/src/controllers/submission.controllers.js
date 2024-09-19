@@ -10,7 +10,7 @@ const studentSubmission = asyncHandler(async (req, res) => {
 
     // Validate required fields
     const requiredFields = [
-        "id", // Change from uniqueId to id
+        "uniqueId", // Change from uniqueId to id
         "bullying",
         "financialIssues", // Change from finance to financialIssues
         "mentalHealth", // Change from menIssue to mentalHealth
@@ -30,7 +30,7 @@ const studentSubmission = asyncHandler(async (req, res) => {
 
     // Create a new student submission instance
     const newSubmission = new student({
-        id: studentData.id, // Ensure this matches the new payload structure
+        uniqueId: studentData.uniqueId, // Ensure this matches the new payload structure
         bullying: studentData.bullying,
         financialIssues: studentData.financialIssues, // Ensure this matches the new payload structure
         mentalHealth: studentData.mentalHealth, // Ensure this matches the new payload structure
@@ -56,6 +56,7 @@ const teacherSubmission = asyncHandler(async (req, res) => {
 
     // Validate required fields
     const requiredFields = [
+        "uniqueId",
         "attendance",
         "grades",
         "streak",
@@ -72,6 +73,7 @@ const teacherSubmission = asyncHandler(async (req, res) => {
 
     // Create a new teacher submission instance
     const newSubmission = new teacher({
+        uniqueId: teacherData.uniqueId,
         attendance: teacherData.attendance,
         grades: teacherData.grades,
         streak: teacherData.streak,
