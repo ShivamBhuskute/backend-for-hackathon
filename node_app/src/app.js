@@ -4,6 +4,14 @@ import cors from "cors";
 
 const app = express();
 
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://wisetrack.vercel.app");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    next();
+  });
+
 const corsOptions = {
     origin: "*", // Your frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
