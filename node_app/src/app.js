@@ -4,30 +4,14 @@ import cors from "cors";
 
 const app = express();
 
-// app.use(
-//     cors({
-//         origin: process.env.CORS_ORIGIN,
-//         credentials: true,
-//     })
-// );
-
-
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://wisetrack.vercel.app"); // http://localhost:5173
-    res.setHeader("Access-Control-Allow-Methods", "GET", "POST", "PUT", "DELETE");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    next();
-});
-
 const corsOptions = {
-    origin: "https://wisetrack.vercel.app", // Replace with your frontend URL
-    methods: ["GET", "POST", "PUT", "DELETE"], // Add the HTTP methods you expect
-    credentials: true, // Set this to true if your frontend sends cookies or authorization headers
+    origin: "https://wisetrack.vercel.app", // Your frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
+    allowedHeaders: ["Content-Type"], // Allowed headers
+    credentials: true, // Allow credentials (cookies, authorization headers)
 };
 
-app.options('/api/aI/predict-student', cors(corsOptions)); // Preflight request
-
-// Enable CORS for the specified origin
+// Enable CORS for all routes
 app.use(cors(corsOptions));
 
 app.use(express.json({}));
