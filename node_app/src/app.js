@@ -11,7 +11,6 @@ const app = express();
 //     })
 // );
 
-app.options('/api/aI/predict-student', cors(corsOptions)); // Preflight request
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "https://wisetrack.vercel.app"); // http://localhost:5173
@@ -25,6 +24,8 @@ const corsOptions = {
     methods: ["GET", "POST", "PUT", "DELETE"], // Add the HTTP methods you expect
     credentials: true, // Set this to true if your frontend sends cookies or authorization headers
 };
+
+app.options('/api/aI/predict-student', cors(corsOptions)); // Preflight request
 
 // Enable CORS for the specified origin
 app.use(cors(corsOptions));
