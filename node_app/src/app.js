@@ -11,6 +11,8 @@ const app = express();
 //     })
 // );
 
+app.options('/api/aI/predict-student', cors(corsOptions)); // Preflight request
+
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "https://wisetrack.vercel.app"); // http://localhost:5173
     res.setHeader("Access-Control-Allow-Methods", "GET", "POST", "PUT", "DELETE");
