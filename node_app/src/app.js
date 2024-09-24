@@ -16,8 +16,10 @@ app.use((req, res, next) => {
     next();
 });
 
-// // Enable CORS for all routes
-// app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Pre-flight request handling
+
+// Enable CORS for all routes
+app.use(cors(corsOptions));
 
 // app.use(cors({
 //     origin: '*', // Allow all origins temporarily for testing
