@@ -11,12 +11,12 @@ const app = express();
 //     })
 // );
 
-// app.use((req, res, next) => {
-//     res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-//     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-//     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-//     next();
-// });
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://wisetrack.vercel.app"); // http://localhost:5173
+    res.setHeader("Access-Control-Allow-Methods", "GET", "POST", "PUT", "DELETE");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    next();
+});
 
 const corsOptions = {
     origin: "https://wisetrack.vercel.app", // Replace with your frontend URL
