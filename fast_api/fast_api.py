@@ -35,7 +35,7 @@ class StudentData(BaseModel):
 def predict_risk(data: StudentData):
     try:
         # Convert input data into a DataFrame
-        data_dict = data.model_dump()
+        data_dict = data.dict()
         df = pd.DataFrame([data_dict])
 
         df.rename(columns={
