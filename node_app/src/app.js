@@ -4,15 +4,20 @@ import cors from "cors";
 
 const app = express();
 
-const corsOptions = {
-    origin: "https://wisetrack.vercel.app", // Your frontend URL
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
-    allowedHeaders: ["Content-Type"], // Allowed headers
-    credentials: true, // Allow credentials (cookies, authorization headers)
-};
+// const corsOptions = {
+//     origin: "https://wisetrack.vercel.app", // Your frontend URL
+//     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
+//     allowedHeaders: ["Content-Type"], // Allowed headers
+//     credentials: true, // Allow credentials (cookies, authorization headers)
+// };
 
-// Enable CORS for all routes
-app.use(cors(corsOptions));
+// // Enable CORS for all routes
+// app.use(cors(corsOptions));
+
+app.use(cors({
+    origin: '*', // Allow all origins temporarily for testing
+    credentials: true,
+}));
 
 app.use(express.json({}));
 app.use(express.urlencoded({ extended: true }));
