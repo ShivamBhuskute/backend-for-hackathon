@@ -30,13 +30,13 @@
 # tzdata==2023.3
 # uvicorn==0.22.0
 # xgboost==2.1.1
-
 # fastapi==0.114.2
 # uvicorn==0.22.0
-# pydantic==1.10.12
-# starlette==0.38.5
-# anyio==4.4.0
 # h11==0.14.0
+
+anyio==4.4.0
+starlette==0.38.5
+pydantic==1.10.12
 annotated-types==0.7.0
 anyio==4.4.0
 click==8.1.7
