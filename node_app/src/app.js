@@ -5,7 +5,7 @@ import cors from "cors";
 const app = express();
 
 const corsOptions = {
-    origin: "h*", // Your frontend URL
+    origin: "*", // Your frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
     allowedHeaders: ["Content-Type"], // Allowed headers
     credentials: true, // Allow credentials (cookies, authorization headers)
