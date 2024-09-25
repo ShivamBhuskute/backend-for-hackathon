@@ -3,6 +3,7 @@ import { Router } from "express";
 
 const router = Router();
 
-router.route("/predict-student").post(predictStudent);
+// router.route("/predict-student").post(predictStudent);
+router.post("/predict-student", predictStudent);
 
 export default router;
