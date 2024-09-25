@@ -171,8 +171,8 @@ const predictStudent = asyncHandler(async (req, res) => {
             Attention_Test_Scores: tea.attention,
             Ragging: std.ragging || 0,
             Finance_Issue: std.financeIssue || 0,
-            Mental_Health_Issue: std.mentalHealthIssue || 0,
-            Physical_Health_Issue: std.physicalHealthIssue || 0,
+            Mental_Health_Issue: std.mentalHealth || 0,
+            Physical_Health_Issue: std.physicalHealth || 0,
             Discrimination_Based_on_Gender:
                 std.discriminationBasedOnGender || 0,
             Physical_Disability: std.physicalDisability || 0,
