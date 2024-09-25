@@ -1,4 +1,4 @@
-const { predictStudent } = require('../src/controllers/aI.controllers'); // Adjust the path as necessary
+const { predictStudent } = require('../src/controllers/aI.controllers.js'); // Adjust the path as necessary
 
 exports.handler = async (event) => {
     if (event.httpMethod === 'POST') {
