@@ -66,15 +66,15 @@ const app = express();
 
 // app.use(cors(corsOptions));
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://wisetrack.vercel.app"); // Allow this origin
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    if (req.method === 'OPTIONS') {
-        res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-        return res.status(200).json({});
-    }
-    next();
-});
+const corsOptions = {
+    origin: "https://wisetrack.vercel.app", // Your frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE"], 
+    allowedHeaders: ["Content-Type", "Authorization"], // Include 'Authorization' if needed
+    credentials: true, // Allow credentials (cookies, authorization headers)
+};
+
+// Enable CORS
+app.use(cors(corsOptions));
 
 
 app.use(express.json());
