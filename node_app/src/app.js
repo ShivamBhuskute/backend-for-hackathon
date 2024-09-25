@@ -57,14 +57,26 @@ dotenv.config({
 const app = express();
 
 // CORS configuration
-const corsOptions = {
-    origin: "*", // Your frontend URL
-    methods: ["GET", "POST", "PUT", "DELETE"], 
-    allowedHeaders: ["Content-Type"], 
-    credentials: true,
-};
+// const corsOptions = {
+//     origin: "*", // Your frontend URL
+//     methods: ["GET", "POST", "PUT", "DELETE"], 
+//     allowedHeaders: ["Content-Type"], 
+//     credentials: true,
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://wisetrack.vercel.app"); // Allow this origin
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    if (req.method === 'OPTIONS') {
+        res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+        return res.status(200).json({});
+    }
+    next();
+});
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
