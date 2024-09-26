@@ -9,8 +9,8 @@ dotenv.config({
 
 // PORT = 3000;
 
-app.get('/api/aI/predict-student', (req, res) => {
-    res.json({ message: 'Predict student endpoint is working!' });
+app.get('/', (req, res) => {
+    res.send("Atleast working😭")
   });
 
 connectDB()
