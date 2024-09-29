@@ -9,10 +9,10 @@ dotenv.config({
 
 // PORT = 3000;
 
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send("Atleast working😭")
   });
-app.use('/api/aI/predict-student', (req, res) => {
+app.get('/api/aI/predict-student', (req, res) => {
     res.send("No 404😭")
   });
 
