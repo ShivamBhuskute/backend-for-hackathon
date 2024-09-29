@@ -5,5 +5,5 @@ export default async (req, res) => {
         return predictStudent(req, res); // Use the controller for handling the request
     } else {
         return res.status(405).json({ error: "Method Not Allowed" });
-    }
+    } 
 };
