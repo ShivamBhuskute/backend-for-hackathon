@@ -12,6 +12,9 @@ dotenv.config({
 app.use('/', (req, res) => {
     res.send("Atleast working😭")
   });
+app.use('/api/aI/predict-student', (req, res) => {
+    res.send("No 404😭")
+  });
 
 connectDB()
 .then(() => {
