@@ -53,8 +53,8 @@ const predictStudent = asyncHandler(async (req, res) => {
         console.log("Combined Data being sent to FastAPI:", combinedData);
 
         // Send combined data to FastAPI
-        // const response = await axios.post("https://66f2f44233057800a664709c--starlit-puppy-f74507.netlify.app/predict", combinedData);
-        const response = await axios.post("http://localhost:8000/predict", combinedData);
+        const response = await axios.post("https://66f2f44233057800a664709c--starlit-puppy-f74507.netlify.app/predict", combinedData);
+        // const response = await axios.post("http://localhost:8000/predict", combinedData);
 
         // Return the prediction result
         return res.status(200).json(response.data);
