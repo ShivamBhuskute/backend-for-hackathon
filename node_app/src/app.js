@@ -21,11 +21,6 @@ app.options('*', cors(corsOptions)); // Pre-flight request handling
 // Enable CORS for all routes
 app.use(cors(corsOptions));
 
-// app.use(cors({
-//     origin: '*', // Allow all origins temporarily for testing
-//     credentials: true,
-// }));
-
 app.use(express.json({}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
